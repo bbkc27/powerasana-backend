@@ -22,6 +22,11 @@ class SequenceList(generics.ListCreateAPIView):
   queryset = Sequence.objects.all()
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+  # def post(self, request, *args, **kwargs):
+  #   print(request.user.username)
+  #   request.data['user_string'] = request.user.username
+  #   return super().post(request, *args, **kwargs)
+
 class SequenceDetail(generics.RetrieveUpdateDestroyAPIView):
   serializer_class = SequenceSerializer
   queryset = Sequence.objects.all()

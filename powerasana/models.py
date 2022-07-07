@@ -4,15 +4,6 @@ import uuid
 
 # Create your models here.
 
-class Pose(models.Model):
-  sanskrit = models.CharField(max_length=100, default='')
-  english_name = models.CharField(max_length=100, default='')
-  cues = models.TextField(default='Breathe')
-  image_url = models.TextField(default='')
-
-  def __str__(self):
-    return self.english_name
-
 class Sequence(models.Model):
   uuid = models.UUIDField(unique=True, auto_created=True, default=uuid.uuid4)
   user_string = models.CharField(max_length=100, default='PowerAsana')
@@ -20,14 +11,25 @@ class Sequence(models.Model):
   duration = models.DurationField()
   intensity = models.CharField(max_length=100, default='')
   peak_pose = models.CharField(max_length=100, default='')
-  pose = models.ForeignKey(
-                    Pose,
-                    on_delete=models.CASCADE,
-                    related_name='poses',
-                    )
   
   def __str__(self):
     return self.intention
+
+class Pose(models.Model):
+  sequences = models.ForeignKey(
+                      Sequence,
+                      on_delete=models.CASCADE,
+                      related_name='poses',
+                      null=True,
+                      blank=True,
+                      )
+  sanskrit = models.CharField(max_length=100, default='')
+  english_name = models.CharField(max_length=100, default='')
+  cues = models.TextField(default='Breathe')
+  image_url = models.TextField(default='')
+
+  def __str__(self):
+    return self.english_name
 
 
 

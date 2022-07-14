@@ -3,6 +3,9 @@ from . import views
 
 urlpatterns = [
   
+  path('signup/', views.CreateUser.as_view()),
+  # path('login/', views.LogIn.as_view()),
+
   path('poses/', views.PoseList.as_view()),
   path('poses/<int:pk>', views.PoseDetail.as_view()),
   path('sequences/', views.SequenceList.as_view()),

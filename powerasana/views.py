@@ -20,7 +20,7 @@ class CreateUser(generics.CreateAPIView):
 class PoseList(generics.ListCreateAPIView):
   serializer_class = PoseSerializer
   queryset = Pose.objects.all()
-  permission_classes = [permissions.IsAuthenticated]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PoseDetail(generics.RetrieveUpdateDestroyAPIView):
   serializer_class = PoseSerializer
@@ -33,7 +33,7 @@ class SequenceList(generics.ListCreateAPIView):
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
   def post(self, request, *args, **kwargs):
-    print(request.user.username)
+    print(request, request.user)
     request.data['user'] = request.user.username
     return super().post(request, *args, **kwargs)
 

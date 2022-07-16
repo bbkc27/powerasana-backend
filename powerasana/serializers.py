@@ -36,9 +36,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class PoseSerializer(serializers.HyperlinkedModelSerializer):
 
+  sequences = serializers.SlugRelatedField(many=True, read_only=True, slug_field='Intention')
+
   class Meta:
     model = Pose
-    fields = ('english_name', 'id', 'sanskrit', 'cues', 'image_url')
+    fields = ('english_name', 'id', 'sanskrit', 'cues', 'image_url', 'sequences')
 
 
 class SequenceSerializer(serializers.HyperlinkedModelSerializer):

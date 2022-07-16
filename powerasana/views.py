@@ -35,7 +35,7 @@ class SequenceList(generics.ListCreateAPIView):
   def post(self, request, *args, **kwargs):
     print(request, request.user)
     request.data['user'] = request.user.username
-    return super().post(request, *args, **kwargs)
+    return self.create(request, *args, **kwargs)
 
 class SequenceDetail(generics.RetrieveUpdateDestroyAPIView):
   serializer_class = SequenceSerializer

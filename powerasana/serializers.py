@@ -34,20 +34,23 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         return token
 
-class PoseSerializer(serializers.HyperlinkedModelSerializer):
 
-  sequences = serializers.SlugRelatedField(many=True, read_only=True, slug_field='Intention')
+class SequenceSerializer(serializers.ModelSerializer):
 
-  class Meta:
-    model = Pose
-    fields = ('english_name', 'id', 'sanskrit', 'cues', 'image_url', 'sequences')
-
-
-class SequenceSerializer(serializers.HyperlinkedModelSerializer):
-
-  poses = serializers.SlugRelatedField(many=True, read_only=True, slug_field='english_name')
-  author = serializers.SlugRelatedField(many=False, read_only=True, slug_field='username')
+  poses = serializers.PrimaryKeyRelatedField(many=True, queryset=Pose.objects.all())
+  author = UserSerializer(many=False, read_only=True)
 
   class Meta:
     model = Sequence
     fields = ('id', 'author', 'uuid', 'intention', 'intensity', 'duration', 'peak_pose', 'poses')
+
+class PoseSerializer(serializers.ModelSerializer):
+
+  # sequences = serializers.PrimaryKeyRelatedField(queryset=Sequence.objects.all(), many=True)
+  sequence_list = SequenceSerializer(many=True, read_only=True)
+
+  class Meta:
+    model = Pose
+    fields = ('english_name', 'id', 'sanskrit', 'cues', 'image_url', 'sequence_list')
+
+

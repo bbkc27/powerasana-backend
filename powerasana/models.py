@@ -1,10 +1,11 @@
 from pyexpat import model
 from django.db.models.deletion import CASCADE
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
 
-from traitlets import default
+
 
 # Create your models here.
 
@@ -12,7 +13,9 @@ from traitlets import default
 class Pose(models.Model):
   sanskrit = models.CharField(max_length=100, default='')
   english_name = models.CharField(max_length=100, default='')
-  cues = models.TextField(default='Breathe')
+  cues = ArrayField(
+        models.CharField(max_length=250, blank=True), size=3,
+        )
   image_url = models.TextField(default='')
 
 

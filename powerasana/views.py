@@ -13,9 +13,6 @@ class CreateUser(generics.CreateAPIView):
   permission_classes = [permissions.AllowAny]
   serializer_class = UserSerializer
 
-# class LogIn(TokenObtainPairView):
-#   permission_classes = [permissions.AllowAny]
-#   serializer_class = MyTokenObtainPairSerializer
 
 class PoseList(generics.ListCreateAPIView):
   serializer_class = PoseSerializer
@@ -41,3 +38,6 @@ class SequenceDetail(generics.RetrieveUpdateDestroyAPIView):
   serializer_class = SequenceSerializer
   queryset = Sequence.objects.all()
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+  def 
+

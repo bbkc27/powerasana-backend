@@ -39,5 +39,7 @@ class SequenceDetail(generics.RetrieveUpdateDestroyAPIView):
   queryset = Sequence.objects.all()
   permission_classes = [permissions.AllowAny]
 
-
+  def put(self, request, *args, **kwargs):
+    print(request)
+    return self.update(request, *args, **kwargs)
 

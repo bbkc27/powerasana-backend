@@ -27,7 +27,7 @@ class PoseDetail(generics.RetrieveUpdateDestroyAPIView):
 class SequenceList(generics.ListCreateAPIView):
   serializer_class = SequenceSerializer
   queryset = Sequence.objects.all()
-  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.AllowAny]
 
   def post(self, request, *args, **kwargs):
     print(request, request.user)

@@ -39,5 +39,5 @@ class SequenceDetail(generics.RetrieveUpdateDestroyAPIView):
   queryset = Sequence.objects.all()
   permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-  def 
+
 

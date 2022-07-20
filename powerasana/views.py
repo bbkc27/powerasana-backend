@@ -37,7 +37,7 @@ class SequenceList(generics.ListCreateAPIView):
 class SequenceDetail(generics.RetrieveUpdateDestroyAPIView):
   serializer_class = SequenceSerializer
   queryset = Sequence.objects.all()
-  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  permission_classes = [permissions.AllowAny]
 
 
 
